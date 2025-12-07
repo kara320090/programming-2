@@ -16,7 +16,7 @@ import java.util.Iterator;
  * 각 데이터베이스(BorrowerDB, BookDB, LoanDB, HisDB)를 통해 전체 도서관 업무를 처리한다.
  *
  * @author (1팀)
- * @version (2025.12.5)
+ * @version (2025.12.8)
  */
 public class LibraryApplication 
 {
