@@ -9,6 +9,6 @@ import CoreEngine.*;
 public class MyApp
 {
     public static void main(String[] args){
-        MyFrame mf = new MyFrame();
+        LibraryApplication app = new LibraryApplication("선문대도서관");
     }
 }

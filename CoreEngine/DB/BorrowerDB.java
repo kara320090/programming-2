@@ -1,5 +1,5 @@
 package CoreEngine.DB;
-import Object.Borrower;
+import CoreEngine.Object.Borrower;
 import java.util.TreeSet;
 import java.util.Iterator;
 /**

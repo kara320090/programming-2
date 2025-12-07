@@ -1,8 +1,8 @@
 package CoreEngine.DB;
 
-import Object.Borrower;
-import Object.Book;
-import Object.Loan;
+import CoreEngine.Object.Borrower;
+import CoreEngine.Object.Book;
+import CoreEngine.Object.Loan;
 
 import java.util.TreeSet;
 import java.util.Iterator;

@@ -1,5 +1,5 @@
 package CoreEngine.Object;
-
+ 
 /**
  * 이용자 객체를 생성하기 위한 클래스
  * 이름과 고유번호를 가진다.
