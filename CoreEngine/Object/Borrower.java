@@ -1,4 +1,4 @@
-package Object;
+package CoreEngine.Object;
 
 /**
  * 이용자 객체를 생성하기 위한 클래스
