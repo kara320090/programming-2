@@ -12,6 +12,7 @@ public class MyPanel extends JPanel {
 
     // 라벨
     private JLabel lblBorrowerName;
+    private JLabel lblBorrowerNumber;   // 추가: 이용자 번호
     private JLabel lblBookTitle;
     private JLabel lblBookAuthor;
     private JLabel lblBookID;
@@ -19,6 +20,7 @@ public class MyPanel extends JPanel {
 
     // 입력 필드
     private JTextField tfBorrowerName;
+    private JTextField tfBorrowerNumber; // 추가
     private JTextField tfBookTitle;
     private JTextField tfBookAuthor;
     private JTextField tfBookID;
@@ -38,7 +40,8 @@ public class MyPanel extends JPanel {
         "UC3. 대출가능 책 목록 보기",
         "UC4. 대출중 책 목록 보기",
         "UC5. 책 대출",
-        "UC6. 책 반납"
+        "UC6. 책 반납",
+        "UC7. 반납 이력 조회"
     };
 
     // 색상 정의
@@ -51,29 +54,38 @@ public class MyPanel extends JPanel {
 
         // ---------- 상단 입력 영역 ----------
         JPanel inputPanel = new JPanel();
-        inputPanel.setLayout(new GridLayout(5, 2, 5, 5)); // UseCase + 4개 필드
+        // UseCase + (이용자 이름, 이용자 번호, 제목, 저자, 책ID) 5개 필드 → 총 6행
+        inputPanel.setLayout(new GridLayout(6, 2, 5, 5));
 
-        lblUseCase = new JLabel("Use Case 선택");
-        cbUseCase = new JComboBox<>(useCases);
+        lblUseCase        = new JLabel("Use Case 선택");
+        cbUseCase         = new JComboBox<>(useCases);
+        lblBorrowerName   = new JLabel("이용자 이름");
+        lblBorrowerNumber = new JLabel("이용자 번호");
+        lblBookTitle      = new JLabel("책 제목");
+        lblBookAuthor     = new JLabel("책 저자이름");
+        lblBookID         = new JLabel("책 등록번호");
 
-        lblBorrowerName = new JLabel("이용자 이름");
-        lblBookTitle    = new JLabel("책 제목");
-        lblBookAuthor   = new JLabel("책 저자이름");
-        lblBookID       = new JLabel("책 등록번호");
-
-        tfBorrowerName = new JTextField(20);
-        tfBookTitle    = new JTextField(20);
-        tfBookAuthor   = new JTextField(20);
-        tfBookID       = new JTextField(20);
+        tfBorrowerName   = new JTextField(20);
+        tfBorrowerNumber = new JTextField(20);
+        tfBookTitle      = new JTextField(20);
+        tfBookAuthor     = new JTextField(20);
+        tfBookID         = new JTextField(20);
 
         inputPanel.add(lblUseCase);
         inputPanel.add(cbUseCase);
+
         inputPanel.add(lblBorrowerName);
         inputPanel.add(tfBorrowerName);
+
+        inputPanel.add(lblBorrowerNumber);
+        inputPanel.add(tfBorrowerNumber);
+
         inputPanel.add(lblBookTitle);
         inputPanel.add(tfBookTitle);
+
         inputPanel.add(lblBookAuthor);
         inputPanel.add(tfBookAuthor);
+
         inputPanel.add(lblBookID);
         inputPanel.add(tfBookID);
 
@@ -98,23 +110,25 @@ public class MyPanel extends JPanel {
     }
 
     // ===== 리스너에서 사용할 getter =====
-    public JTextField getBorrowerNameField() { return tfBorrowerName; }
-    public JTextField getBookTitleField()    { return tfBookTitle; }
-    public JTextField getBookAuthorField()   { return tfBookAuthor; }
-    public JTextField getBookIDField()       { return tfBookID; }
+    public JTextField getBorrowerNameField()   { return tfBorrowerName; }
+    public JTextField getBorrowerNumberField() { return tfBorrowerNumber; }
+    public JTextField getBookTitleField()      { return tfBookTitle; }
+    public JTextField getBookAuthorField()     { return tfBookAuthor; }
+    public JTextField getBookIDField()         { return tfBookID; }
 
-    public JButton getRunButton()            { return btnRun; }
-    public JButton getClearButton()          { return btnClear; }
+    public JButton getRunButton()              { return btnRun; }
+    public JButton getClearButton()            { return btnClear; }
 
-    public JComboBox<String> getUcComboBox() { return cbUseCase; }
-    public int getSelectedUseCaseIndex()     { return cbUseCase.getSelectedIndex(); }
+    public JComboBox<String> getUcComboBox()   { return cbUseCase; }
+    public int getSelectedUseCaseIndex()       { return cbUseCase.getSelectedIndex(); }
 
-    public JTextArea getOutputArea()         { return taOutput; }
+    public JTextArea getOutputArea()           { return taOutput; }
 
     // ===== 공통 유틸 =====
 
     public void clearInputFields() {
         tfBorrowerName.setText("");
+        tfBorrowerNumber.setText("");
         tfBookTitle.setText("");
         tfBookAuthor.setText("");
         tfBookID.setText("");
@@ -123,15 +137,17 @@ public class MyPanel extends JPanel {
     // UC 선택에 따라 입력칸 활성화/색상 변경
     public void updateUseCaseUI(int ucIndex) {
         // 우선 모두 비활성 상태로 초기화
-        setFieldState(tfBorrowerName, false, disabledColor);
-        setFieldState(tfBookTitle,    false, disabledColor);
-        setFieldState(tfBookAuthor,   false, disabledColor);
-        setFieldState(tfBookID,       false, disabledColor);
+        setFieldState(tfBorrowerName,   false, disabledColor);
+        setFieldState(tfBorrowerNumber, false, disabledColor);
+        setFieldState(tfBookTitle,      false, disabledColor);
+        setFieldState(tfBookAuthor,     false, disabledColor);
+        setFieldState(tfBookID,         false, disabledColor);
 
         // UC별로 필요한 필드만 활성화 + 색상 하이라이트
         switch (ucIndex) {
-            case 0: // UC1. 이용자 등록 : 이용자 이름만
-                setFieldState(tfBorrowerName, true, requiredColor);
+            case 0: // UC1. 이용자 등록 : 이용자 이름, 이용자 번호
+                setFieldState(tfBorrowerName,   true, requiredColor);
+                setFieldState(tfBorrowerNumber, true, requiredColor);
                 break;
 
             case 1: // UC2. 책 등록 : 책 제목, 책 저자, 책 등록번호
@@ -145,21 +161,26 @@ public class MyPanel extends JPanel {
                 // 모두 비활성 상태 유지
                 break;
 
-            case 4: // UC5. 책 대출 : 이용자 이름, 책 등록번호
-                setFieldState(tfBorrowerName, true, requiredColor);
-                setFieldState(tfBookID,       true, requiredColor);
+            case 4: // UC5. 책 대출 : 이용자 번호, 책 등록번호
+                setFieldState(tfBorrowerNumber, true, requiredColor);
+                setFieldState(tfBookID,         true, requiredColor);
                 break;
 
             case 5: // UC6. 책 반납 : 책 등록번호만
                 setFieldState(tfBookID, true, requiredColor);
                 break;
 
+            case 6: // UC7. 반납 이력 조회 : 이용자 번호만
+                setFieldState(tfBorrowerNumber, true, requiredColor);
+                break;
+
             default:
                 // 혹시 모를 예외상황에서는 모두 활성화 (기본)
-                setFieldState(tfBorrowerName, true, normalColor);
-                setFieldState(tfBookTitle,    true, normalColor);
-                setFieldState(tfBookAuthor,   true, normalColor);
-                setFieldState(tfBookID,       true, normalColor);
+                setFieldState(tfBorrowerName,   true, normalColor);
+                setFieldState(tfBorrowerNumber, true, normalColor);
+                setFieldState(tfBookTitle,      true, normalColor);
+                setFieldState(tfBookAuthor,     true, normalColor);
+                setFieldState(tfBookID,         true, normalColor);
         }
     }
 

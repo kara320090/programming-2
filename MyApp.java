@@ -1,14 +1,13 @@
 import FrontGUI.*;
-import CoreEngine.*;
+
 /**
- * LibraryApplication 시작
+ * 도서관 관리 시스템 메인 실행 클래스
  *
  * @author (profsHwang)
  * @version (2025.11.26)
  */
-public class MyApp
-{
-    public static void main(String[] args){
-        LibraryApplication app = new LibraryApplication("선문대도서관");
+public class MyApp {
+    public static void main(String[] args) {
+        MyFrame mf = new MyFrame();
     }
 }
