@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=UseCaseSelectionListener
+comment0.text=\r\n\ UC\ \uCF64\uBCF4\uBC15\uC2A4\ \uC120\uD0DD\ \uBCC0\uACBD\ \uC804\uC6A9\ \uB9AC\uC2A4\uB108\r\n\ -\ \uC120\uD0DD\uB41C\ UC\uC5D0\ \uB530\uB77C\ MyPanel\uC758\ \uC785\uB825\uCE78\ \uC0C1\uD0DC/\uC0C9\uC0C1\ \uBCC0\uACBD\r\n
+comment1.params=panel
+comment1.target=UseCaseSelectionListener(MyPanel)
+comment2.params=e
+comment2.target=void\ actionPerformed(java.awt.event.ActionEvent)
+numComments=3
