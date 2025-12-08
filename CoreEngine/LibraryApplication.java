@@ -39,6 +39,8 @@ public class LibraryApplication
         this.bookDB = new BookDB();
         this.loanDB = new LoanDB();
         this.hisDB = new HisDB();
+        // 발표용 임시 데이터셋 추가 (demo)
+        this.bookDB.addSampleBooks();
     }
     
     /**
