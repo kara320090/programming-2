@@ -12,12 +12,21 @@ public class LibraryActionHandler implements ActionListener {
 
     private LibraryApplication libApp;
     private MyPanel panel;
-
+    /**
+     * LibraryActionHandler 생성자.
+     *
+     * @param libApp 핵심 로직 객체
+     * @param panel UI 패널 객체
+     */
     public LibraryActionHandler(LibraryApplication libApp, MyPanel panel) {
         this.libApp = libApp;
         this.panel = panel;
     }
-
+    /**
+     * '실행' 또는 'Clear' 버튼 클릭 시 호출됩니다.
+     *
+     * @param e 액션 이벤트 객체
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         Object src = e.getSource();
@@ -29,7 +38,9 @@ public class LibraryActionHandler implements ActionListener {
         }
     }
 
-    // "실행" 버튼: 선택된 UC에 따라 LA 메서드 호출
+    /**
+     * * UC에 따른 입력값을 받아 메서드를 호출하고 결과를 출력창에 표시합니다.
+     */
     private void handleRun() {
         int ucIndex = panel.getSelectedUseCaseIndex();
 
@@ -99,11 +110,10 @@ public class LibraryActionHandler implements ActionListener {
 
         panel.getOutputArea().append(sb.toString());
     }
-
-    // "Clear" 버튼: 입력 필드 초기화
+    /**
+     * * 입력 필드 내용을 초기화합니다.
+     */ 
     private void handleClear() {
         panel.clearInputFields();
-        // 필요하면 출력까지 지우고 싶을 때:
-        // panel.getOutputArea().setText("");
     }
 }

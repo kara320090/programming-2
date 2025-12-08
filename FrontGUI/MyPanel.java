@@ -10,7 +10,6 @@ import java.awt.*;
  */
 public class MyPanel extends JPanel {
 
-    // 라벨
     private JLabel lblBorrowerName;
     private JLabel lblBorrowerNumber;   // 추가: 이용자 번호
     private JLabel lblBookTitle;
@@ -18,21 +17,17 @@ public class MyPanel extends JPanel {
     private JLabel lblBookID;
     private JLabel lblUseCase;
 
-    // 입력 필드
     private JTextField tfBorrowerName;
     private JTextField tfBorrowerNumber; // 추가
     private JTextField tfBookTitle;
     private JTextField tfBookAuthor;
     private JTextField tfBookID;
 
-    // 버튼
     private JButton btnRun;
     private JButton btnClear;
 
-    // 출력 영역
     private JTextArea taOutput;
 
-    // UC 선택 콤보박스
     private JComboBox<String> cbUseCase;
     private String[] useCases = {
         "UC1. 이용자 등록",
@@ -44,17 +39,17 @@ public class MyPanel extends JPanel {
         "UC7. 반납 이력 조회"
     };
 
-    // 색상 정의
     private final Color requiredColor = new Color(255, 255, 200); // 연한 노랑
     private final Color disabledColor = new Color(230, 230, 230); // 연한 회색
     private final Color normalColor   = Color.WHITE;
-
+    /**
+     * MyPanel 생성자.
+     * 모든 UI 컴포넌트를 생성하고 배치합니다.
+     */
     public MyPanel() {
         setLayout(new BorderLayout(5, 5));
 
-        // ---------- 상단 입력 영역 ----------
         JPanel inputPanel = new JPanel();
-        // UseCase + (이용자 이름, 이용자 번호, 제목, 저자, 책ID) 5개 필드 → 총 6행
         inputPanel.setLayout(new GridLayout(6, 2, 5, 5));
 
         lblUseCase        = new JLabel("Use Case 선택");
@@ -89,7 +84,6 @@ public class MyPanel extends JPanel {
         inputPanel.add(lblBookID);
         inputPanel.add(tfBookID);
 
-        // ---------- 버튼 영역 ----------
         btnRun = new JButton("실행");
         btnClear = new JButton("Clear");
         JPanel buttonPanel = new JPanel();
@@ -100,7 +94,6 @@ public class MyPanel extends JPanel {
         northPanel.add(inputPanel, BorderLayout.CENTER);
         northPanel.add(buttonPanel, BorderLayout.SOUTH);
 
-        // ---------- 출력 영역 ----------
         taOutput = new JTextArea(15, 30);
         taOutput.setEditable(false);
         JScrollPane scrollPane = new JScrollPane(taOutput);
@@ -109,23 +102,43 @@ public class MyPanel extends JPanel {
         add(scrollPane, BorderLayout.CENTER);
     }
 
-    // ===== 리스너에서 사용할 getter =====
-    public JTextField getBorrowerNameField()   { return tfBorrowerName; }
-    public JTextField getBorrowerNumberField() { return tfBorrowerNumber; }
-    public JTextField getBookTitleField()      { return tfBookTitle; }
-    public JTextField getBookAuthorField()     { return tfBookAuthor; }
-    public JTextField getBookIDField()         { return tfBookID; }
+    public JTextField getBorrowerNameField(){ 
+        return tfBorrowerName; 
+    }
+    public JTextField getBorrowerNumberField(){ 
+        return tfBorrowerNumber; 
+    }
+    public JTextField getBookTitleField(){ 
+        return tfBookTitle; 
+    }
+    public JTextField getBookAuthorField(){ 
+        return tfBookAuthor; 
+    }
+    public JTextField getBookIDField(){ 
+        return tfBookID; 
+    }
 
-    public JButton getRunButton()              { return btnRun; }
-    public JButton getClearButton()            { return btnClear; }
+    public JButton getRunButton(){ 
+        return btnRun; 
+    }
+    public JButton getClearButton(){ 
+        return btnClear; 
+    }
 
-    public JComboBox<String> getUcComboBox()   { return cbUseCase; }
-    public int getSelectedUseCaseIndex()       { return cbUseCase.getSelectedIndex(); }
+    public JComboBox<String> getUcComboBox(){ 
+        return cbUseCase; 
+    }
+    public int getSelectedUseCaseIndex(){ 
+        return cbUseCase.getSelectedIndex(); 
+    }
 
-    public JTextArea getOutputArea()           { return taOutput; }
+    public JTextArea getOutputArea(){ 
+        return taOutput; 
+    }
 
-    // ===== 공통 유틸 =====
-
+    /**
+     * 모든 입력 필드의 내용을 초기화합니다.
+     */
     public void clearInputFields() {
         tfBorrowerName.setText("");
         tfBorrowerNumber.setText("");
@@ -133,17 +146,18 @@ public class MyPanel extends JPanel {
         tfBookAuthor.setText("");
         tfBookID.setText("");
     }
-
-    // UC 선택에 따라 입력칸 활성화/색상 변경
+    /**
+     * Use Case 선택에 따라 입력 필드의 활성화 상태와 배경색을 업데이트합니다.
+     *
+     * @param ucIndex 현재 선택된 Use Case의 인덱스
+     */
     public void updateUseCaseUI(int ucIndex) {
-        // 우선 모두 비활성 상태로 초기화
-        setFieldState(tfBorrowerName,   false, disabledColor);
+        setFieldState(tfBorrowerName, false, disabledColor);
         setFieldState(tfBorrowerNumber, false, disabledColor);
-        setFieldState(tfBookTitle,      false, disabledColor);
-        setFieldState(tfBookAuthor,     false, disabledColor);
-        setFieldState(tfBookID,         false, disabledColor);
+        setFieldState(tfBookTitle, false, disabledColor);
+        setFieldState(tfBookAuthor, false, disabledColor);
+        setFieldState(tfBookID, false, disabledColor);
 
-        // UC별로 필요한 필드만 활성화 + 색상 하이라이트
         switch (ucIndex) {
             case 0: // UC1. 이용자 등록 : 이용자 이름, 이용자 번호
                 setFieldState(tfBorrowerName,   true, requiredColor);
@@ -183,7 +197,13 @@ public class MyPanel extends JPanel {
                 setFieldState(tfBookID,         true, normalColor);
         }
     }
-
+    /**
+     * 텍스트 필드의 상태(편집 가능 여부, 배경색)를 설정합니다.
+     *
+     * @param field    상태를 변경할 {@link JTextField} 객체
+     * @param editable 필드의 **편집 가능 여부** (true: 활성화, false: 비활성화)
+     * @param bg       필드에 적용할 **배경색**
+     */
     private void setFieldState(JTextField field, boolean editable, Color bg) {
         field.setEditable(editable);
         field.setBackground(bg);

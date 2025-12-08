@@ -10,7 +10,12 @@ public class MyFrame extends JFrame {
 
     private LibraryApplication libApp; // LA 인스턴스
     private MyPanel panel;            // 메인 패널
-
+    /**
+     * LibraryActionHandler 생성자.
+     *
+     * @param libApp 핵심 로직 처리를 위한 인스턴스
+     * @param panel UI 상태 접근 및 업데이트를 위한 인스턴스
+     */
     public MyFrame() {
         // 1) LA 인스턴스 생성 (CoreEngine/LA는 변경 없음)
         libApp = new LibraryApplication("선문대학교 중앙도서관");
