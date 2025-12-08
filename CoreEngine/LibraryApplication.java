@@ -39,6 +39,9 @@ public class LibraryApplication
         this.bookDB = new BookDB();
         this.loanDB = new LoanDB();
         this.hisDB = new HisDB();
+        
+        this.bookDB.addSampleBooks();
+        this.borrowerDB.addSampleBorrowers();
     }
     
     /**
