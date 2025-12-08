@@ -28,9 +28,7 @@ public class UseCaseSelectionListener implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         int ucIndex = panel.getSelectedUseCaseIndex();
 
-        // UC가 바뀌면 입력칸 내용은 초기화
         panel.clearInputFields();
-        // UC에 따라 활성화/색상 재설정
         panel.updateUseCaseUI(ucIndex);
     }
 }

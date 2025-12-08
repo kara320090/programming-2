@@ -39,8 +39,8 @@ public class MyPanel extends JPanel {
         "UC7. 반납 이력 조회"
     };
 
-    private final Color requiredColor = new Color(255, 255, 200); // 연한 노랑
-    private final Color disabledColor = new Color(230, 230, 230); // 연한 회색
+    private final Color requiredColor = new Color(255, 255, 200); 
+    private final Color disabledColor = new Color(230, 230, 230);
     private final Color normalColor   = Color.WHITE;
     /**
      * MyPanel 생성자.
