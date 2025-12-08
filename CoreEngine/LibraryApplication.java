@@ -39,14 +39,9 @@ public class LibraryApplication
         this.bookDB = new BookDB();
         this.loanDB = new LoanDB();
         this.hisDB = new HisDB();
-<<<<<<< HEAD
-        // 발표용 임시 데이터셋 추가 (demo)
-        this.bookDB.addSampleBooks();
-=======
         
         this.bookDB.addSampleBooks();
         this.borrowerDB.addSampleBorrowers();
->>>>>>> 89c80cabaab4279f23935d80682c73fd1620768b
     }
     
     /**
@@ -197,7 +192,6 @@ public class LibraryApplication
         if(loan == null){
             return "[오류] 책 " + catalogueNumber + " 은(는) 대출 중이 아님.";
         }
-
         Borrower borrower = loan.getBorrower();
         Book book = loan.getBook();
 
